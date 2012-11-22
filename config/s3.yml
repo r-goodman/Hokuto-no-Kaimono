@@ -1,0 +1,9 @@
+development:
+	bucket: hokuto
+	access_key_id: AKIAJJVAIRV2S7HCK3UQ
+	secret_access_key: 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
+
+production:
+	bucket: hokuto
+	access_key_id: AKIAJJVAIRV2S7HCK3UQ
+	secret_access_key: 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
