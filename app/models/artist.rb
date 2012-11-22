@@ -9,7 +9,7 @@ class Artist < ActiveRecord::Base
 
 	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 
-	def default_release_date
+	def default_bio
       	self.bio ||= "Bio not created yet."
     end
 end
