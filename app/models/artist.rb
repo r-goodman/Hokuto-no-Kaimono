@@ -3,9 +3,7 @@ class Artist < ActiveRecord::Base
 
 	before_create :default_bio
 
-	has_attached_file :photo, :styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" },
-						:url => "/assets/artists/:id/:style/:basename.:extension",
-						:path => ":rails_root/public/assets/artists/:id/:style/:basename.:extension"
+	has_attached_file :photo, :styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" }
 	has_many :tracks
 	has_many :users
 
