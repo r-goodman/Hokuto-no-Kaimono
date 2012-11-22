@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  unit_price: 9.99
+  basket_id: 1
+  track_id: 1
+
+two:
+  unit_price: 9.99
+  basket_id: 1
+  track_id: 1

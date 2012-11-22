@@ -1,0 +1,69 @@
+<% if user_signed_in? && current_user.artist %>
+	<% @part_of_album = false %>
+
+	<% @album.tracks.each do |track| %>
+		<% if current_user.artist.id == track.artist.id %>
+			<% @part_of_album = true %>
+		<% end %>
+	<% end %>
+					<h3><u>Album Admin Tools</u></h3>
+					<%= link_to (raw(' <i class="icon-pencil"></i> Edit Album Information ')), edit_album_path(@album) %>
+					<%= link_to (raw(' <i class="icon-music"></i> Add Track To Album')), "/albums/#{@album.id}/addTracks", method: :get %>
+				</div>
+			</div>
+			<hr>
+			<div class="row-fluid">
+				<div class="span12 centreDiv">
+<% end %>
+
+		<div class="hero-unit customHero">
+			<h1><i class="icon-music"></i> <%= @album.name %></h1>
+		</div>
+	</div>
+</div>
+
+	<div class="row-fluid">
+		<div class="span12 centreDiv">
+			<div class="span4">
+				<h3>Total Length: <%= (Time.mktime(0) + albumLength(@album)).strftime("%Mm %Ss %Lms") %></h3>
+			</div>
+			<div class="span4">
+				<h3>Total Price: <%= number_to_currency(albumPrice(@album), :unit => "&pound;") %></h3>
+			</div>
+			<div class="span4">
+				<h3>Release Date: <%= @album.release_date.strftime("#{@album.release_date.day.ordinalize} %B %Y") %></h3>
+				<%= button_to "Add Album To Basket", line_items_album_path(:album_id => @album.id), :method => :post %>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="row-fluid centreDiv">
+		<div class="span12">
+			<h3><u>Track Listing</u></h3>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Artist</th>
+						<th>Genre</th>
+						<th>Length</th>
+						<th>Individual Price</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @album.tracks.each do |track| %>
+						<tr>
+							<td><%= link_to track.title, track %></td>
+							<td><%= link_to track.artist.name, track.artist %></td>
+							<td><%= link_to track.genre.name, track.genre %></td>
+							<td><%= (Time.mktime(0) + track.length).strftime("%M:%S.%L") %></td>
+							<td><%= number_to_currency(track.price, :unit => "&pound;") %></td>
+							<td><%= button_to "Add Track To Basket", addTrackToBasket_basket_path(track) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>

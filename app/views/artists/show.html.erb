@@ -1,0 +1,99 @@
+		<div class="hero-unit customHero">
+			<h1>
+				<i class="icon-sitemap"></i> <%= @artist.name %><br>
+			</h1>
+			<h2>
+				<% if !@artist.twitter.empty? %>
+					<% twitter = "http://www.twitter.com/" + @artist.twitter %>
+					<%= link_to (raw('<i class="icon-twitter"></i>')), twitter %>
+				<% end %>
+
+				<% if !@artist.facebook.empty? %>
+					<% facebook = "http://www.facebook.com/" + @artist.facebook %>
+					<%= link_to (raw('<i class="icon-facebook"></i>')), facebook %>
+				<% end %>
+			</h2>
+		</div>
+	</div>
+</div>
+
+<% if user_signed_in? %>
+	<% if current_user.artist.id == @artist.id %>
+		<div class="row-fluid">
+			<div class="span12 centreDiv">
+				<h3><u>Band Admin Tools</u></h3>
+				<div class="span4">
+					<%= link_to (raw(' <i class="icon-pencil"></i> Edit Band Information ')), edit_artist_path(current_user.artist) %>
+				</div>
+
+				<div class="span4">
+					<%= link_to (raw(' <i class="icon-pencil"></i> Add Member To Band ')), edit_artist_path(current_user.artist) %>
+				</div>
+
+				<div class="span4">
+					<%= link_to (raw(' <i class="icon-pencil"></i> Remove Member From Band ')), edit_artist_path(current_user.artist) %>
+				</div>
+
+				<div class="span4">
+					<%= link_to (raw(' <i class="icon-music"></i> Create New Album ')), new_album_path %>
+				</div>
+
+				<div class="span4">
+					<%= link_to (raw(' <i class="icon-headphones"></i> Create New Track ')), new_track_path %>
+				</div>
+
+				<div class="span4">
+					<%= link_to (raw(' <i class="icon-headphones"></i> View Band Sales ')), "/artists/#{current_user.artist.id}/sales" %>
+				</div>
+			</div>
+		</div>
+		
+		<hr>
+	<% end %>
+<% end %>
+
+<div class="row-fluid">
+	<div class="span12">
+			<%= image_tag(@artist.photo.url(:medium), :class => "centreDiv") %><br>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12 centreDiv">
+		<div class="span3">
+			<h3><u>Description</u></h3>
+			<%= @artist.bio %>
+		</div>
+		<div class="span3">
+			<h3><u>Associated Albums</u></h3>
+			<% if @artist.tracks.count == 0 %>
+				<%= @artist.name %> has no related albums
+			<% else %>
+				<% @artist.tracks.uniq.each do |track| %>
+					<%= link_to track.album.name, album_path(track.album) %>
+					<br>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="span3">
+			<h3><u>Associated Genres</u></h3>
+			<% if @artist.tracks.count == 0 %>
+				<%= @artist.name %> has no related genres
+			<% else %>
+				<% @artist.tracks.each do |track| %>
+					<%= link_to track.genre.name, genre_path(track.genre) %>
+					<br>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="span3">
+			<h3><u>Tracks</u></h3>
+			<% if @artist.tracks.count == 0 %>
+				<%= @artist.name %> has no related tracks
+			<% else %>
+				<% @artist.tracks.each do |track| %>
+					<%= link_to track.title, track_path(track) %>
+					<br>
+				<% end %>
+			<% end %>
+		</div>

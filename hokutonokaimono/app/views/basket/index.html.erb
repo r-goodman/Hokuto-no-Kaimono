@@ -1,0 +1,49 @@
+		<div class="hero-unit customHero">
+			<h1> <i class="icon-shopping-cart"></i> Shopping Basket</h1>
+		</div>
+	</div>
+</div>
+
+<%#=session[:basket]%>
+<% totalLength = totalPrice = 0 %>
+<% if @basket.items.count > 0 %>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Artist</th>
+				<th>Album</th>
+				<th>Genre</th>
+				<th>Length</th>
+				<th>Price</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @basket.items.each do |item| %>
+				<% totalLength += findTrackObject(item).length %>
+				<% totalPrice += findTrackObject(item).price %>
+				<tr>
+					<td><%= findTrackObject(item).title %></td>
+					<td><%= findTrackObject(item).artist.name %></td>
+					<td><%= findTrackObject(item).album.name %></td>
+					<td><%= findTrackObject(item).genre.name %></td>
+					<td><%= (Time.mktime(0) + findTrackObject(item).length).strftime("%M:%S.%L") %></td>
+					<td><%= number_to_currency(findTrackObject(item).price, :unit => "&pound;") %></td>
+					<td><%= button_to "Remove Track From Basket", removeItemFromBasket_basket_path(findTrackObject(item)), :class => :'btn' %></td>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+
+	<div class="basketTotal">
+		<h5>Total Price = <%= number_to_currency(totalPrice, :unit => "&pound;") %></h5>
+		<h5>Total Length = <%= (Time.mktime(0) + totalLength).strftime("%M:%S.%L") %></h5>
+		<br>
+		<%= button_to "Empty Basket", :action => :emptyBasket, :class => :'btn' %>
+		<%= button_to "Continue Shopping", root_path, :class => :'btn' %>
+		<%= button_to "Checkout", @response.redirect_url, :class => :'btn' %>
+	</div>
+<% else %>
+	<h1>NO ITEMS!</h1>
+<% end %>

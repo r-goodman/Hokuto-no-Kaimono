@@ -1,0 +1,16 @@
+		<div class="hero-unit customHero">
+			<h1><i class="icon-sitemap"></i> Genres</h1>
+			<i>The feelings, memories and thoughts of music</i>
+		</div>
+	</div>
+</div>
+
+<% @genres.each do |genre| %>
+	<div class="span2 centreDiv">
+		<%= link_to genre do %>
+			<%= image_tag genre.photo.url(:small) %><br>
+			<%= genre.name %><br>
+			<br>
+		<% end %>
+	</div>
+<% end %>

@@ -1,0 +1,26 @@
+    <div class="hero-unit customHero">
+      <h1><i class="icon-credit-card"></i> Previous Orders</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+	<table class="table">
+		<tr>
+			<td>Order Made</td>
+			<td>IP Address</td>
+			<td>Amount of Tracks Purchased</td>
+			<td>Total Sale Amount</td>
+			<td>Total Runtime</td>
+		</tr>
+		<% @orders.each do |order| %>
+			<tr>
+				<td><%= link_to order.purchased_at.strftime("%A #{order.purchased_at.day.ordinalize} %B %Y at %H:%M"), order_path(order), :method => :get %></td>
+				<td><%= link_to order.user_ip, order_path(order), :method => :get %></td>
+				<td><%= link_to get_amount_of_tracks_bought(order), order_path(order), :method => :get %></td>
+				<td><%= link_to number_to_currency(get_total_price_of_order(order), :unit => "&pound;"), order_path(order), :method => :get %></td>
+				<td><%= link_to (Time.mktime(0) + get_total_runtime_of_order(order)).strftime("%Mm %Ss %Lms"), order_path(order), :method => :get %></td>
+			</tr>
+		<% end %>
+	</table>

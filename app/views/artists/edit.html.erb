@@ -1,0 +1,43 @@
+<h2>Edit <%= @artist.name %></h2>
+
+<%= form_for @artist do |f| %>
+
+  <div>
+    <%= f.label :name %>
+    <br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :bio %>
+    <br />
+    <%= f.text_field :bio %>
+  </div>
+
+  <div>
+    <%= f.label :twitter %> 
+    <br />
+    <%= f.text_field :twitter %>
+  </div>
+
+  <div>
+    <%= f.label :facebook %>
+    <br />
+    <%= f.text_field :facebook %>
+  </div>
+
+  <div>
+    <%= f.label :photo %>
+    <%= image_tag @artist.photo.url(:small) %>
+    <i>(leave blank if you don't want to change it)</i>
+    <br />
+    <%= f.file_field :photo %>
+  </div>
+
+  <div>
+    <br />
+    <%= f.submit "Update Artist Information" %>
+  </div>
+<% end %>
+
+<%= button_to "Back", :back %>

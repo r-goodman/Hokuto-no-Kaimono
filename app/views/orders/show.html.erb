@@ -1,0 +1,32 @@
+		<div class="hero-unit customHero">
+			<h1><i class="icon-credit-card"></i> Order Details</h1>
+		</div>
+	</div>
+</div>
+
+<table class="table">
+	<tr>
+		<th></th>
+		<th>Track Number on Album</th>
+		<th>Title</th>
+		<th>Artist</th>
+		<th>Album</th>
+		<th>Genre</th>
+		<th>Price</th>
+		<th>Track Length</th>
+		<th>Download</th>
+	</tr>
+	<% @orderDetails.each do |order| %>
+	<tr>
+		<td><%= image_tag(order.album.photo.url(:small)) %></td>
+		<td><%= order.trackNumber %></td>
+		<td><%= order.title %></td>
+		<td><%= order.artist.name %></td>
+		<td><%= order.album.name %></td>
+		<td><%= order.genre.name %></td>
+		<td><%= number_to_currency(order.price, :unit => "&pound;") %></td>
+		<td><%= (Time.mktime(0) + order.length).strftime("%Mm %Ss %Lms") %></td>
+		<td><%= link_to "Download Track", order.mp3.expiring_url(300) %></td>
+	</tr>
+	<% end %>
+</table>

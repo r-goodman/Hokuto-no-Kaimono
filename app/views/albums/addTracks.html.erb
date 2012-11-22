@@ -1,0 +1,54 @@
+<h2>Add Track To <%= @album.name %></h2>
+
+<%= form_for @track, :html => { :multipart => true } do |f| %>
+
+  <div>
+    <%= f.label :title %>
+    <br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.hidden_field :artist_id, :value => current_user.artist.id %>
+  </div>
+
+  <div>
+    <%= f.hidden_field :album_id, :value => @album.id %>
+  </div>
+
+  <div>
+    <%= f.label :genre_id %>
+    <br />
+    <%= f.collection_select(:genre_id, @genres, :id, :name) %>
+  </div>
+
+  <div>
+    <%= f.label :release_date %>
+    <br />
+    <%= f.date_select :release_date, :order => [:day, :month, :year] %>
+  </div>
+
+  <div>
+    <%= f.label "Price (in £s)" %>
+    <br />
+    <%= f.text_field :price %>
+  </div>
+
+  <div>
+    <%= f.label "Length (in Seconds)" %>
+    <br />
+    <%= f.text_field :length %>
+  </div>
+
+  <div>
+    <%= f.label :mp3 %>
+    <br />
+    <%= f.file_field :mp3 %>
+  </div>
+
+  <div>
+    <br />
+    <%= f.submit "Add New Track To Album" %>
+  </div>
+  
+<% end %>

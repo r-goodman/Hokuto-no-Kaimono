@@ -1,0 +1,40 @@
+		<div class="hero-unit customHero">
+			<h1><i class="icon-sitemap"></i> <%= @genre.name %></h1>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+			<%= image_tag(@genre.photo.url(:medium), :class => "centreDiv") %><br>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12 centreDiv">
+		<div class="span4">
+			<h3><u>Description</u></h3>
+			<%= @genre.description %>
+		</div>
+		<div class="span4">
+			<h3><u>Associated Artists</u></h3>
+				<% if @genre.tracks.count == 0 %>
+					<%= @genre.name %> has no related artists
+				<% else %>
+					<% @genre.tracks.limit(10).each do |track| %>
+						<%= link_to track.artist.name, artist_path(track.artist) %>
+						<br>
+					<% end %>
+				<% end %>
+		</div>
+		<div class="span4">
+			<h3><u>Associated Tracks</u></h3>
+			<% if @genre.tracks.count == 0 %>
+				<%= @genre.name %> has no related tracks
+			<% else %>
+				<% @genre.tracks.limit(10).each do |track| %>
+					<%= link_to track.title, track_path(track) %>
+					<br>
+				<% end %>
+			<% end %>
+		</div>

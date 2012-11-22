@@ -1,0 +1,37 @@
+<h2>Edit <%= @album.name %></h2>
+
+<%= form_for @album do |f| %>
+
+  <div>
+    <u><%= f.label :name %></u>
+    <br />
+    <%= f.text_field :name %>
+  </div>
+
+  <br />
+
+  <div>
+    <u><%= f.label :release_date %></u>
+    <br />
+    <%= f.date_select :release_date, :order => [:day, :month, :year] %>
+  </div>
+
+  <br />
+
+  <div>
+    <%= f.label :photo %>
+    <%= image_tag @album.photo.url(:small) %>
+    <i>(leave blank if you don't want to change it)</i>
+    <br />
+    <%= f.file_field :photo %>
+  </div>
+
+  <br />
+
+  <div>
+    <br />
+    <%= f.submit "Update Album Information", :class => "btn" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", :back %>

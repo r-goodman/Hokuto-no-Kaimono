@@ -1,0 +1,5 @@
+syntax: glob
+
+tmp/*
+public/assets/*
+*.log

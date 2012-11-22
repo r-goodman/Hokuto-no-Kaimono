@@ -1,0 +1,60 @@
+<% if user_signed_in? %>
+	<% if current_user.artist.id == @track.artist.id %>
+				<h3><u>Track Admin Tools</u></h3>
+				<%= link_to (raw(' <i class="icon-pencil"></i> Edit Track Information ')), edit_track_path(@track) %>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span12 centreDiv">
+	<% end %>
+<% end %>
+
+
+		<div class="hero-unit customHero">
+			<h1><i class="icon-headphones"></i> <%= @track.title %></h1>
+		</div>
+	</div>
+</div>
+
+
+
+	<div class="span12 centreDiv">
+		<div class="span5">
+
+			<h3>Artist: <%= link_to @track.artist.name, @track.artist %></h3>
+			<h3>Album:
+				<% if @track.album.nil? %>
+					No Album Specified
+				<% else %>
+					<%= link_to @track.album.name, @track.album %>
+				<% end %>
+			</h3>
+			<h3>Genre: <%= link_to @track.genre.name, @track.genre %></h3>
+			<h3>Length:
+				<% if @track.mp3.nil? %>
+					<% if @track.mp3_content_type == "audio/mp3"  %>
+						<% Mp3Info.open(location) do |mp3| %>
+							<%= (Time.mktime(0) + mp3.length).strftime("%M:%S.%L") %>
+						<% end %>
+					<% end %>
+					<% if @track.mp3_content_type == "audio/ogg" %>
+						<% OggInfo.open(location) do |mp3| %>
+							<%= (Time.mktime(0) + mp3.length).strftime("%M:%S.%L") %>
+						<% end %>
+					<% end %>
+				<% else %>
+					<% if @track.length.nil? %>
+						No Length Specified
+					<% else %>
+						<%= (Time.mktime(0) + @track.length).strftime("%M:%S.%L") %>
+					<% end %>
+				<% end %>
+			</h3>
+			<h3>Release Date: <%= @track.release_date.strftime("#{@track.release_date.day.ordinalize} %B %Y") %></h3>
+		</div>
+		<div class="span5">
+			<h3>Price: <%= number_to_currency(@track.price, :unit => "&pound;") %></h3>
+			<%= button_to "Add Track To Basket", line_items_path(:track_id => @track), :method => :post, :class => "btn" %>
+		</div>
+	</div>

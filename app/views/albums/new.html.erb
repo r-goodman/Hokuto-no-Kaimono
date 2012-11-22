@@ -1,0 +1,37 @@
+<h2>New Album For <%= current_user.artist.name %></h2>
+
+<%= form_for @album, :html => { :multipart => true } do |f| %>
+
+  <div>
+    <%= f.label :name %>
+    <br />
+    <%= f.text_field :name %>
+  </div>
+  <br />
+  <div>
+    <%= f.label :release_date %>
+    <br />
+    <%= f.date_select :release_date, :order => [:day, :month, :year] %>
+  </div>
+  <br />
+  <div>
+    <%= f.label :photo %>
+    <br />
+    <%= f.file_field :photo %>
+  </div>
+
+  <div>
+    <%#= f.hidden_field :artist_id, :value => current_user.artist %>
+  </div>
+
+  <div>
+    <%#= f.file_field :mp3 %>
+  </div>
+
+  <div>
+    <br />
+    <%= f.submit "Create New Album" %>
+  </div>
+<% end %>
+
+<%= button_to "Back", :back %>

@@ -1,0 +1,65 @@
+<% if @album.name %>
+	<div class="hero-unit customHero">
+		<h1><i class="icon-music"></i> <%= @album.name %></h1>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12 centreDiv">
+			<div class="span4">
+				<h3>Total Length: <%= (Time.mktime(0) + albumLength(@album)).strftime("%Mm %Ss %Lms") %></h3>
+			</div>
+			<div class="span4">
+				<h3>Total Price: <%= number_to_currency(albumPrice(@album), :unit => "&pound;") %></h3>
+			</div>
+			<div class="span4">
+				<%= button_to "Add Album To Basket", addAlbumToBasket_basket_path(@album) %>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="row-fluid centreDiv">
+		<div class="span12">
+			<h3><u>Track Listing</u></h3>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Preview</th>
+						<th>File Type</th>
+						<th>Title</th>
+						<th>Artist</th>
+						<th>Genre</th>
+						<th>Length</th>
+						<th>Individual Price</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @album.tracks.each do |track| %>
+						<tr>
+							<td>
+								<% if track.mp3.exists? %>
+									<% location = "https://hokuto.s3.amazonaws.com" + track.mp3.path %>
+									<%= audio_tag location, :controls => :true %></audio>
+								<% end %>
+							</td>
+							<td>
+								<%= track.mp3_content_type %>
+							</td>
+							<td><%= link_to track.title, track %></td>
+							<td><%= link_to track.artist.name, track.artist %></td>
+							<td><%= link_to track.genre.name, track.genre %></td>
+							<td><%= (Time.mktime(0) + track.length).strftime("%M:%S.%L") %></td>
+							<td><%= number_to_currency(track.price, :unit => "&pound;") %></td>
+							<td><%= button_to "Add Track To Basket", addTrackToBasket_basket_path(track) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<% else %>
+		<div class="hero-unit customHero">
+		<h1><i class="icon-music"></i> Album Unavailable</h1>
+	</div>
+<% end %>

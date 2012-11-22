@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Hokuto no Kaimono" %></title>
+    <%= csrf_meta_tags %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
+    <%= javascript_include_tag "application" %>
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <!-- Size should be 144 x 144 pixels -->
+    <%= favicon_link_tag 'images/apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+
+    <!-- For iPhone with high-resolution Retina display: -->
+    <!-- Size should be 114 x 114 pixels -->
+    <%= favicon_link_tag 'images/apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+
+    <!-- For first- and second-generation iPad: -->
+    <!-- Size should be 72 x 72 pixels -->
+    <%= favicon_link_tag 'images/apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- Size should be 57 x 57 pixels -->
+    <%= favicon_link_tag 'images/apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
+
+    <script type="text/javascript">
+      $(window).load(function() {
+        var max = 0;
+        var divHeight = 0;
+
+        $('.trackPictureDiv').each(function() {
+            divHeight = $(this).height();
+
+            if(divHeight > max) {
+                max = divHeight;
+            }
+        }).css({
+          'height':max + 'px'
+        });
+
+        $("#myHokuto").popover({
+          content: '<a class="popoverStyle"><% if @current_basket.nil? || @current_basket.line_items.count == 0 %>No items in basket<% else %>Total Items: <%= @current_basket.line_items.count %><% end %></a>',
+          placement: "bottom",
+          title: '<a class="popoverStyle">Shopping Basket</a>',
+          trigger: "hover"      
+        });
+
+        $('.carousel').carousel({
+          interval: 10000,
+          pause: "hover"
+        });
+      });
+    </script>
+  </head>
+  <body>
+
+    <div class="navbar navbar-fixed-top customNavbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/">Hokuto no Kaimono</a>
+          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="container-fluid nav-collapse">
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-headphones"></i> Music Catalogue </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/tracks"> <i class="icon-headphones"></i> All Songs </a></li>
+                  <li><a href="/albums"> <i class="icon-music"></i> Albums </a></li>
+                  <li><a href="/artists"> <i class="icon-group"></i> Artists </a></li>
+                  <li><a href="/genres"> <i class="icon-sitemap"></i> Genres </a></li>
+                </ul>
+              </li>
+              <li>
+                <% if user_signed_in? %>
+                  <li class="divider-vertical"></li>
+                  <li id="myHokuto"><a href="/basket"><i class="icon-shopping-cart"></i> Shopping Basket</a></li>
+                  <li class="divider-vertical"></li>
+                  <li><%= link_to (raw(' <i class="icon-credit-card"></i> Previous Orders ')), orders_path %></li>
+                  <li class="divider-vertical"></li>
+                  <% if current_user.artist %>
+                    <li><%= link_to (raw(' <i class="icon-group"></i> My Band ')), artist_path(current_user.artist) %></li>
+                    <li class="divider-vertical"></li>
+                  <% end %>
+                    <li><%= link_to (raw(' <i class="icon-pencil"></i> My Hokuto ')), edit_user_registration_path %></li>
+                  <li class="divider-vertical"></li>
+                  <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+                <% else %>
+                  <%= link_to (raw(' <i class="icon-arrow-up"></i> Sign Up ')), new_user_registration_path %>
+                  </li>
+                  <li class="divider-vertical"></li>
+                  <li>
+                    <%= link_to (raw(' <i class="icon-arrow-right"></i> Sign In ')), new_user_session_path %>
+                  </li>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+      </div><!--/row-->
+
+      <br><br>
+
+      <div class="row-fluid">
+        <div class="span12">
+          <footer>
+            <p>&copy; Hokuto no Kaimono <%= Time.now.year %></p>
+          </footer>
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

@@ -1,0 +1,16 @@
+		<div class="hero-unit customHero">
+			<h1><i class="icon-music"></i> Albums</h1>
+			<i>Collections of music produced by your favourite artists</i>
+		</div>
+	</div>
+</div>
+
+<% @albums.each do |album| %>
+	<div class="span3 trackPictureDiv centreDiv trackDiv">
+		<%= link_to album do %>
+			<%= image_tag album.photo.url(:small) %><br>
+			<%= album.name %><br>
+			<br>
+		<% end %>
+	</div>
+<% end %>

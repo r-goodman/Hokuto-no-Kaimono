@@ -1,0 +1,43 @@
+		<div class="hero-unit customHero">
+			<h1><i class="icon-headphones"></i> Tracks</h1>
+			<i>The songs you know and love</i>
+		</div>
+	</div>
+</div>
+
+	<% @tracks.each do |track| %>
+		<div class="span4 trackPictureDiv centreDiv trackDiv">
+			<%= link_to track do %>
+				<% if track.album %>
+					<% if track.album.photo %>
+						<%= image_tag track.album.photo.url(:small) %>
+					<% end %>
+				<% else %>
+					No Album Art Found
+				<% end %>
+
+				<br>
+
+				Title: <%= track.title %>
+
+				<br>
+
+				<% if track.album %>
+					Album: <%= track.album.name %>
+				<% else %>
+					Album: No Album Specified
+				<% end %>
+			<% end %>
+
+			<br>
+
+			<% if track.mp3.exists? %>
+				<% location = "https://hokuto.s3.amazonaws.com" + track.mp3.path %>
+				<%= audio_tag location, :controls => :true %></audio>
+			<% end %>
+
+			<br>
+
+			<a class="btn" href="#">BUY THIS SONG!</a>
+		</div>
+	<% end %>

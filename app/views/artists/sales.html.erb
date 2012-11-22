@@ -1,0 +1,33 @@
+		<div class="hero-unit customHero">
+			<h1><i class="icon-headphones"></i> Artist Sales: <%= @artist.name %></h1>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="span6">
+			<h2><u>Lifetime Totals</u></h2>
+			<hr>
+			<h4>Number of Tracks Sold: <%= get_total_tracks_sold_for_artist(@tracks) %></h4>
+			<h4>Total Track Sales: <%= get_total_sales_for_artist(@tracks) %></h4>
+		</div>
+
+		<div class="span6">
+			<h2><u>Totals Per Track</u></h2>
+			<hr>
+			<table class="table">
+				<tr>
+					<th>Track</th>
+					<th>Amount Purchased</th>
+				</tr>
+				<% @tracks.each do |track| %>
+					<tr>
+						<td><%= link_to track.title, track %></td>
+						<td><%= track.transactions.count %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

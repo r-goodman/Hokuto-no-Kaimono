@@ -1,0 +1,63 @@
+		<div class="hero-unit customHero">
+			<h1>
+				<i class="icon-sitemap"></i> <%= @artist.name %><br>
+			</h1>
+			<h2>
+				<% if !@artist.twitter.empty? %>
+					<% twitter = "http://www.twitter.com/" + @artist.twitter %>
+					<%= link_to (raw('<i class="icon-twitter"></i>')), twitter %>
+				<% end %>
+				<% if !@artist.facebook.empty? %>
+					<% facebook = "http://www.facebook.com/" + @artist.facebook %>
+					<%= link_to (raw('<i class="icon-facebook"></i>')), facebook %>
+				<% end %>
+			</h2>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+			<%= image_tag(@artist.photo.url(:medium), :class => "centreDiv") %><br>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12 centreDiv">
+		<div class="span3">
+			<h3><u>Description</u></h3>
+			<%= @artist.bio %>
+		</div>
+		<div class="span3">
+			<h3><u>Associated Albums</u></h3>
+			<% if @artist.tracks.count == 0 %>
+				<%= @artist.name %> has no related albums
+			<% else %>
+				<% @artist.tracks.each do |track| %>
+					<%= link_to track.album.name, album_path(track.album) %>
+					<br>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="span3">
+			<h3><u>Associated Genres</u></h3>
+			<% if @artist.tracks.count == 0 %>
+				<%= @artist.name %> has no related genres
+			<% else %>
+				<% @artist.tracks.each do |track| %>
+					<%= link_to track.genre.name, genre_path(track.genre) %>
+					<br>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="span3">
+			<h3><u>Tracks</u></h3>
+			<% if @artist.tracks.count == 0 %>
+				<%= @artist.name %> has no related tracks
+			<% else %>
+				<% @artist.tracks.each do |track| %>
+					<%= link_to track.title, track_path(track) %>
+					<br>
+				<% end %>
+			<% end %>
+		</div>

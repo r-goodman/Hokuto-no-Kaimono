@@ -1,0 +1,23 @@
+<p>Name: <%= @address['name'] %></p>
+<table class="table">
+	<tr>
+		<th>Title</th>
+		<th>Artist</th>
+		<th>Album</th>
+		<th>Genre</th>
+		<th>Length</th>
+		<th>Price</th>
+	</tr>
+	<% @basket.line_items.each do |item| %>
+		<tr>
+			<td><%= item.track.title %></td>
+			<td><%= item.track.artist.name %></td>
+			<td><%= item.track.album.name %></td>
+			<td><%= item.track.genre.name %></td>
+			<td><%= item.track.length %></td>
+			<td><%= item.track.price %></td>
+		</tr>
+	<%end%>
+</table>
+
+<%= link_to "Confirm", :controller => 'paypal_express', :action => 'purchase' %>

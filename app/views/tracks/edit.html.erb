@@ -1,0 +1,56 @@
+    <div class="hero-unit customHero">
+      <h1><i class="icon-music"></i> Edit Track: <%= @track.title %></h1>
+    </div>
+  </div>
+</div>
+
+<%= form_for @track do |f| %>
+
+  <div>
+    <u><%= f.label :title %></u>
+    <br />
+    <%= f.text_field :title %>
+  </div>
+
+  <br />
+
+  <div>
+    <u><%= f.label :release_date %></u>
+    <br />
+    <%= f.date_select :release_date, :order => [:day, :month, :year] %>
+  </div>
+
+  <br />
+
+  <div>
+    <u><%= f.label "Price (in £s)" %></u>
+    <br />
+    <%= f.text_field :price %>
+  </div>
+
+  <br />
+
+  <div>
+    <u><%= f.label "Length (in Seconds)" %></u>
+    <br />
+    <%= f.text_field :length %>
+  </div>
+
+  <br />
+
+  <div>
+    <u><%= f.label "Upload Song" %></u>
+    <i>(leave blank if you don't want to change it)</i>
+    <br />
+    <%= f.file_field :mp3 %>
+  </div>
+
+  <br />
+
+  <div>
+    <br />
+    <%= f.submit "Update Track Information", :class => "btn" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", :back %>

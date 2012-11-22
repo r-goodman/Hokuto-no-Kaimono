@@ -1,0 +1,43 @@
+		<div class="hero-unit customHero">
+			<h1> <i class="icon-shopping-cart"></i> Shopping Basket</h1>
+		</div>
+	</div>
+</div>
+
+<% if @basket.line_items.count > 0 %>
+
+<table class="table">
+	<tr>
+		<th>Title</th>
+		<th>Artist</th>
+		<th>Album</th>
+		<th>Genre</th>
+		<th>Length</th>
+		<th>Price</th>
+		<th></th>
+	</tr>
+
+	<% @basket.line_items.each do |item| %>
+		<tr>
+			<td><%= link_to item.track.title, item.track %></td>
+			<td><%= link_to item.track.artist.name, item.track.artist %></td>
+			<td><%= link_to item.track.album.name, item.track.album %></td>
+			<td><%= link_to item.track.genre.name, item.track.genre %></td>
+			<td><%= (Time.mktime(0) + item.track.length).strftime("%M:%S.%L") %></td>
+			<td><%= number_to_currency(item.track.price, :unit => "&pound;") %></td>
+			<td><%= button_to "Remove Track From Basket", line_items_remove_path(:track_id => item.track.id), :method => :delete, :class => :'btn' %></td>
+		</tr>
+	<%end%>
+</table>
+
+	<div class="basketTotal">
+		<br>
+		<%= button_to "Empty Basket", line_items_empty_path, :method => :delete, :class => :'btn' %>
+		<%= button_to "Continue Shopping", root_path, :class => :'btn' %>
+		<%#= button_to "Checkout", @response.redirect_url, :class => :'btn' %>
+		<%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), :controller => 'paypal_express', :action => 'checkout' %>
+	</div>
+
+<% else %>
+	<h3>You have no items in your cart. Why not try buying some amazing tracks from our catalogue?</h3>
+<% end %>
