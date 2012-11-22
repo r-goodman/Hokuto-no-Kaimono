@@ -31,13 +31,13 @@ class Track < ActiveRecord::Base
   	scope :no_album, where(:album_id => nil)
   	scope :no_genre, where(:genre_id => nil)
 
-  	validates_attachment_presence :mp3
-  	validates_attachment_size :mp3, 
-  						:less_than => 150.megabytes,
-  						:message => "File must be less than 150MB"
-  	validates_attachment_content_type :mp3, 
-  						:content_type => [ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3' ],
-              :message => 'File must be of filetype .mp3 or .ogg'
+  	# validates_attachment_presence :mp3
+  	# validates_attachment_size :mp3, 
+  	# 					:less_than => 150.megabytes,
+  	# 					:message => "File must be less than 150MB"
+  	# validates_attachment_content_type :mp3, 
+  	# 					:content_type => [ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3' ],
+   #            :message => 'File must be of filetype .mp3 or .ogg'
 
     def default_album_id
       self.album_id ||= 1
