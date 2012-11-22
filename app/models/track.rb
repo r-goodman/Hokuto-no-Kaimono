@@ -37,7 +37,7 @@ class Track < ActiveRecord::Base
   	# 					:message => "File must be less than 150MB"
   	# validates_attachment_content_type :mp3, 
   	# 					:content_type => [ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3' ],
-   #            :message => 'File must be of filetype .mp3 or .ogg'
+    #           :message => 'File must be of filetype .mp3 or .ogg'
 
     def default_album_id
       self.album_id ||= 1
