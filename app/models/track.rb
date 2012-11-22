@@ -40,15 +40,15 @@ class Track < ActiveRecord::Base
               :message => 'File must be of filetype .mp3 or .ogg'
 
     def default_album_id
-      self.album_id ||= 6
+      self.album_id ||= 1
     end
 
     def default_artist_id
-      self.artist_id ||= 4 
+      self.artist_id ||= 1 
     end
 
     def default_genre
-      self.genre_id ||= 50
+      self.genre_id ||= 1
     end
 
     def default_length
