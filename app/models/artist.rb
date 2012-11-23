@@ -19,6 +19,11 @@ class Artist < ActiveRecord::Base
 	has_many :tracks
 	has_many :users
 
+	scope :all
+  	scope :has_twitter, where(['twitter != nil'])
+    scope :has_facebook, where(['facebook != nil'])
+    scope :has_google_plus, where(['googlePlus != nil'])
+
   	validates_attachment_presence :photo
   	validates_attachment_size :photo, 
 		:less_than => 10.megabytes,
