@@ -5,6 +5,7 @@
 	</div>
 </div>
 
+<% if @tracks.count > 0 %>
 	<% @tracks.each do |track| %>
 		<div class="span4 trackPictureDiv centreDiv trackDiv">
 			<%= link_to track do %>
@@ -40,3 +41,6 @@
 			<br>
 		</div>
 	<% end %>
+<% else %>
+	<h2>No Tracks Found</h2>
+<% end %>

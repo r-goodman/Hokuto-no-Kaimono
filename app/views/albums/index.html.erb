@@ -5,12 +5,16 @@
 	</div>
 </div>
 
-<% @albums.each do |album| %>
-	<div class="span3 trackPictureDiv centreDiv trackDiv">
-		<%= link_to album do %>
-			<%= image_tag album.photo.url(:small) %><br>
-			<%= album.name %><br>
-			<br>
-		<% end %>
-	</div>
+<% if @albums.count > 0 %>
+	<% @albums.each do |album| %>
+		<div class="span3 trackPictureDiv centreDiv trackDiv">
+			<%= link_to album do %>
+				<%= image_tag album.photo.url(:small) %><br>
+				<%= album.name %><br>
+				<br>
+			<% end %>
+		</div>
+	<% end %>
+<% else %>
+	<h3>No Albums Found</h3>
 <% end %>

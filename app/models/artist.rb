@@ -5,24 +5,17 @@ class Artist < ActiveRecord::Base
 
 	has_attached_file :photo, 
 		:styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" }
-	 #  	:storage => :s3,
-		# :s3_credentials => { 
-	 #  		:access_key_id => ENV['S3_KEY'], 
-	 #  		:secret_access_key => ENV['S3_SECRET'], 
-	 #  		:bucket => ENV['S3_BUCKET']
-	 #    },
-	 #    :s3_protocol => 'https',
-	 #    :s3_permissions => :private,
-	 #  	:path => "/artist/:id/:basename.:extension",
-	 #  	:url => "/artist/:id/:basename.:extension"
+	  	:storage => :s3,
+		:s3_credentials => { 
+	  		:access_key_id => ENV['S3_KEY'], 
+	  		:secret_access_key => ENV['S3_SECRET'], 
+	  		:bucket => ENV['S3_BUCKET']
+	    },
+	  	:path => "/artist/:id/:basename.:extension",
+	  	:url => "/artist/:id/:basename.:extension"
 
 	has_many :tracks
 	has_many :users
-
-	scope :all
-  	scope :has_twitter, where(['twitter != nil'])
-    scope :has_facebook, where(['facebook != nil'])
-    scope :has_google_plus, where(['googlePlus != nil'])
 
   	validates_attachment_presence :photo
   	validates_attachment_size :photo, 
