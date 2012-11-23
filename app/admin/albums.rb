@@ -72,7 +72,7 @@ ActiveAdmin.register Album do
         	end
 
         	row :photo do
-        		image_tag("http://hokuto.s3.amazonaws.com" + album.photo.path(:large)
+        		image_tag("http://hokuto.s3.amazonaws.com" + album.photo.path(:large))
         	end
 
         end
