@@ -19,7 +19,7 @@ ActiveAdmin.register Album do
 
 
 		column "Photo" do |album|
-  			image_tag(album.photo.url(:small))
+  			image_tag("http://hokuto.s3.amazonaws.com" + album.photo.path(:small))
   		end
 
 	  	column :name
