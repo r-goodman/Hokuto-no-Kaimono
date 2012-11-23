@@ -11,8 +11,6 @@ class Artist < ActiveRecord::Base
 	  		:secret_access_key => ENV['S3_SECRET'], 
 	  		:bucket => ENV['S3_BUCKET']
 	    },
-	    :s3_protocol => 'https',
-	    :s3_permissions => :private,
 	  	:path => "/artist/:id/:basename.:extension",
 	  	:url => "/artist/:id/:basename.:extension"
 
