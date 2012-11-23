@@ -4,7 +4,12 @@ class AlbumsController < ApplicationController
   end
 
   def show
-  	@album = Album.find(params[:id])
+    begin
+  	 @album = Album.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.debug "Album Record Not Found"
+      redirect_to albums_path, :notice => "Record Not Found"
+    end
   end
 
   def new
@@ -21,7 +26,12 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-  	@album = Album.find(params[:id])
+    begin
+     @album = Album.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.debug "Album Record Not Found"
+      redirect_to albums_path, :notice => "Record Not Found"
+    end
   end
 
   def update
