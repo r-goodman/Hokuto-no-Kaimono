@@ -15,33 +15,33 @@ class Track < ActiveRecord::Base
   	belongs_to :album
     has_and_belongs_to_many :transactions
 
-
   	has_attached_file :mp3,
   	:storage => :s3,
-	:s3_credentials => { 
-		:access_key_id => ENV['S3_KEY'], 
-		:secret_access_key => ENV['S3_SECRET'], 
-		:bucket => ENV['S3_BUCKET']
-      	},
-      	:s3_protocol => 'https',
-      	:s3_permissions => :private,
+	  :s3_credentials => { 
+  		:access_key_id => ENV['S3_KEY'], 
+  		:secret_access_key => ENV['S3_SECRET'], 
+  		:bucket => ENV['S3_BUCKET']
+    },
+    :s3_protocol => 'https',
+    :s3_permissions => :private,
   	:path => "/track/:id/:basename.:extension",
   	:url => "/track/:id/:basename.:extension"
   	
   	scope :all
   	scope :unreleased, where(['release_date > ?', Date.current])
+    scope :released, where(['release_date <= ?', Date.current])
   	scope :no_release_date, where(:release_date => nil)
   	scope :no_artist, where(:artist_id => nil)
   	scope :no_album, where(:album_id => nil)
   	scope :no_genre, where(:genre_id => nil)
 
-  	# validates_attachment_presence :mp3
-  	# validates_attachment_size :mp3, 
-  	# 					:less_than => 150.megabytes,
-  	# 					:message => "File must be less than 150MB"
-  	# validates_attachment_content_type :mp3, 
-  	# 					:content_type => [ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3' ],
-    #           :message => 'File must be of filetype .mp3 or .ogg'
+  	validates_attachment_presence :mp3
+  	validates_attachment_size :mp3, 
+  						:less_than => 150.megabytes,
+  						:message => "File must be less than 150MB"
+  	validates_attachment_content_type :mp3, 
+  						:content_type => [ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3' ],
+              :message => 'File must be of filetype .mp3'
 
     def default_album_id
       self.album_id ||= 1
