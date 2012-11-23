@@ -18,7 +18,7 @@ ActiveAdmin.register Track do
   	index do
   		column "Album Photo" do |track|
   			if track.album
-  				image_tag(track.album.photo.url(:small))
+  				image_tag("http://hokuto.s3.amazonaws.com" + track.album.photo.path(:small))
   			else
   				"No Album Photo"
   			end

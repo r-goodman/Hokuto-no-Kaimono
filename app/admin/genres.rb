@@ -9,7 +9,7 @@ ActiveAdmin.register Genre do
 	index do
 
 		column "Photo" do |genre|
-  			image_tag(genre.photo.url(:small))
+  			image_tag("http://hokuto.s3.amazonaws.com" + genre.photo.path(:small))
   		end
 
 		column :name
@@ -28,7 +28,7 @@ ActiveAdmin.register Genre do
         	row :name
         	row :description
         	row :photo do
-        		image_tag(genre.photo.url(:small))
+        		image_tag("http://hokuto.s3.amazonaws.com" + genre.photo.path(:large))
         	end
         end
 	end

@@ -5,7 +5,7 @@ ActiveAdmin.register Artist do
 
   	index do
   		column "Photo" do |artist|
-  			image_tag(artist.photo.url(:small))
+  			image_tag("http://hokuto.s3.amazonaws.com" + artist.photo.path(:small))
   		end
 
 	  	column "Name", :name
@@ -37,7 +37,7 @@ ActiveAdmin.register Artist do
         	row :facebook
         	row :googlePlus
         	row :photo do
-        		image_tag(artist.photo.url(:large))
+        		image_tag("http://hokuto.s3.amazonaws.com" + artist.photo.path(:large))
         	end
         end
 	end
