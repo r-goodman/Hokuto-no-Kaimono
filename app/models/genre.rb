@@ -9,8 +9,8 @@ class Genre < ActiveRecord::Base
 	  		:secret_access_key => ENV['S3_SECRET'], 
 	  		:bucket => ENV['S3_BUCKET']
 	    },
-	  	:path => "/album/:id/:basename.:extension",
-	  	:url => "/album/:id/:basename.:extension"
+	  	:path => "/genre/:id/:basename.:extension",
+	  	:url => "/genre/:id/:basename.:extension"
 		# :url => "/assets/genres/:id/:style/:basename.:extension",
 		# :path => ":rails_root/public/assets/genres/:id/:style/:basename.:extension"
 

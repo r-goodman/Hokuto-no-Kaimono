@@ -3,7 +3,8 @@ class Album < ActiveRecord::Base
 
   	before_create :default_release_date
 
-  	has_attached_file :photo, :styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" },
+  	has_attached_file :photo, 
+  		:styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" },
   		:storage => :s3,
 		:s3_credentials => { 
 	  		:access_key_id => ENV['S3_KEY'], 

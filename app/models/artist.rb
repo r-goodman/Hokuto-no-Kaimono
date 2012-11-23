@@ -4,7 +4,7 @@ class Artist < ActiveRecord::Base
 	before_create :default_bio
 
 	has_attached_file :photo, 
-		:styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" }
+		:styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" },
 	  	:storage => :s3,
 		:s3_credentials => { 
 	  		:access_key_id => ENV['S3_KEY'], 
