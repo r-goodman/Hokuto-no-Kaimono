@@ -4,20 +4,35 @@ class ArtistsController < ApplicationController
   end
 
   def show
-  	@artist = Artist.find(params[:id])
+    begin
+  	  @artist = Artist.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.debug "Artist Record Not Found - Controller: Artists || Method: Show"
+      redirect_to artists_path, :alert => "Artist Not Found."
+    end
   end
 
   def edit
-  	@artist = current_user.artist
+    begin
+  	 @artist = current_user.artist
+    rescue ActiveRecord::RecordNotFound
+      logger.debug "Artist Record Not Found - Controller: Artists || Method: Edit"
+      redirect_to artists_path, :alert => "Artist Not Found."
+    end
   end
 
   def update
-  	@artist = current_user.artist
-  	if @artist.update_attributes!(params[:artist])
-  		redirect_to @artist
-  	else
-  		redirect_to :edit, :notice => "Update Failed! Please try again"
-  	end
+    begin
+    	@artist = current_user.artist
+    	if @artist.update_attributes!(params[:artist])
+    		redirect_to @artist, :success => "Update Successful!"
+    	else
+    		redirect_to :edit, :alert => "Update Failed!"
+    	end
+    rescue ActiveRecord::RecordNotFound
+      logger.debug "Artist Record Not Found - Controller: Artists || Method: Update"
+      redirect_to artists_path, :alert => "Artist Not Found."
+    end
   end
 
   def sales

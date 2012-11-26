@@ -8,7 +8,7 @@ class AlbumsController < ApplicationController
   	 @album = Album.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       logger.debug "Album Record Not Found - Controller: Albums || Method: Show"
-      redirect_to albums_path, :notice => "Album Not Found."
+      redirect_to albums_path, :alert => "Album Not Found."
     end
   end
 
@@ -30,7 +30,7 @@ class AlbumsController < ApplicationController
      @album = Album.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       logger.debug "Album Record Not Found - Controller: Albums || Method: Edit"
-      redirect_to albums_path, :notice => "Album Not Found."
+      redirect_to albums_path, :alert => "Album Not Found."
     end
   end
 
@@ -38,13 +38,13 @@ class AlbumsController < ApplicationController
     begin
     	@album = Album.find(params[:id])
       if @album.update_attributes!(params[:album])
-        redirect_to @album, :notice => "Update Successful!"
+        redirect_to @album, :success => "Update Successful!"
       else
-        redirect_to :edit, :notice => "Update Failed! Please try again!"
+        redirect_to :edit, :alert => "Update Failed!"
       end
     rescue ActiveRecord::RecordNotFound
       logger.debug "Album Record Not Found - Controller: Albums || Method: Update"
-      redirect_to albums_path, :notice => "Album Not Found."
+      redirect_to albums_path, :alert => "Album Not Found."
     end
   end
 
