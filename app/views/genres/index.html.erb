@@ -8,7 +8,8 @@
 <% @genres.each do |genre| %>
 	<div class="span2 centreDiv">
 		<%= link_to genre do %>
-			<%= image_tag genre.photo.url(:small) %><br>
+			<% imageLocation = "http://hokuto.s3.amazonaws.com" + genre.photo.path(:small) %> 
+			<%= image_tag imageLocation %><br>
 			<%= genre.name %><br>
 			<br>
 		<% end %>

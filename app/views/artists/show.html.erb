@@ -53,8 +53,9 @@
 <% end %>
 
 <div class="row-fluid">
-	<div class="span12">
-			<%= image_tag(@artist.photo.url(:medium), :class => "centreDiv") %><br>
+	<div class="span12 centreDiv">
+		<% imageLocation = "http://hokuto.s3.amazonaws.com" + @artist.photo.path(:medium) %> 
+		<%= image_tag imageLocation %><br>
 	</div>
 </div>
 

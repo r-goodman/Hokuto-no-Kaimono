@@ -11,7 +11,8 @@
 			<%= link_to track do %>
 				<% if track.album %>
 					<% if track.album.photo %>
-						<%= image_tag track.album.photo.url(:small) %>
+						<% imageLocation = "http://hokuto.s3.amazonaws.com" + track.album.photo.path(:small) %> 
+						<%= image_tag imageLocation %><br>
 					<% end %>
 				<% else %>
 					No Album Art Found

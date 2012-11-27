@@ -8,7 +8,8 @@
 <% @artists.each do |artist| %>
 	<div class="span3 trackPictureDiv centreDiv trackDiv">
 		<%= link_to artist do %>
-			<%= image_tag artist.photo.url(:small) %><br>
+			<% imageLocation = "http://hokuto.s3.amazonaws.com" + artist.photo.path(:small) %> 
+			<%= image_tag imageLocation %><br>
 			<%= artist.name %><br>
 			<br>
 		<% end %>
