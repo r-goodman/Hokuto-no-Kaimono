@@ -9,7 +9,8 @@
 	<% @albums.each do |album| %>
 		<div class="span3 trackPictureDiv centreDiv trackDiv">
 			<%= link_to album do %>
-				<%= image_tag album.photo.url(:small) %><br>
+			<% imageLocation = "hokuto.s3.amazonaws.com" + album.photo.path(:small) %> 
+				<%= image_tag imageLocation %><br>
 				<%= album.name %><br>
 				<br>
 			<% end %>
