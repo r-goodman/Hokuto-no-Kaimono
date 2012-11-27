@@ -17,7 +17,7 @@ module ApplicationHelper
 	end
 
 	def tenMostRecentTracks
-		@tenTracks = Track.released.order("release_date DESC").limit(10)
+		@tenTracks = Track.released.order("release_date DESC").limit(10).all
 		return @tenTracks
 	end
 
