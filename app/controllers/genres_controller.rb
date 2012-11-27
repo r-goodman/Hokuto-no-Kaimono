@@ -9,5 +9,6 @@ class GenresController < ApplicationController
   	rescue ActiveRecord::RecordNotFound
       logger.debug "Genre Record Not Found - Controller: Genres || Method: Show"
       redirect_to genres_path, :notice => "Genre Not Found."
+    end
   end
 end
