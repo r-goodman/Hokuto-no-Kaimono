@@ -6,81 +6,85 @@
 </div>
 
 <div class="row-fluid">
-  <div class="span6">
-    <h1><u>Ten Most Recently Added Tracks</u></h1>
-    <br>
-    <div id="tenMostRecentTracks" class="carousel slide carousel-fade centreDiv">
-      <div class="carousel-inner">
-        <% tenMostRecentTracks.each do |track, i| %>
-          <% if i == 0 %>
-            <div class="item active">
-              <% if track.album.photo %>
-                <%= image_tag track.album.photo.url(:medium), :class => "centreDiv" %>
+  <% if tenMostRecentTracks.count > 0 %>
+    <div class="span6">
+      <h1><u>Ten Most Recently Added Tracks</u></h1>
+      <br>
+      <div id="tenMostRecentTracks" class="carousel slide carousel-fade centreDiv">
+        <div class="carousel-inner">
+            <% tenMostRecentTracks.each do |track, i| %>
+              <% if i == 0 %>
+                <div class="item active">
+                  <% if track.album.photo %>
+                    <%= image_tag track.album.photo.url(:medium), :class => "centreDiv" %>
+                  <% end %>
+                  <div class="carousel-caption">
+                    <%= link_to track do %>
+                      <h2><%= track.title %> - <%= track.artist.name %></h2>
+                      <i>Released: <%= track.release_date.strftime("#{track.release_date.dayordinalize}  %B %Y")  %></i>
+                    <% end %>
+                  </div>
+                </div>
+              <% else %>
+                <div class="item">
+                  <% if track.album %>
+                    <% if track.album.photo %>
+                      <%= image_tag track.album.photo.url(:medium), :class => "centreDiv" %>
+                    <% end %>
+                  <% end %>
+                  <div class="carousel-caption">
+                    <%= link_to track do %>
+                      <h2><%= track.title %> - <%= track.artist.name %></h2>
+                      <i>Released: <%= track.release_date.strftime("#{track.release_date.day.ordinalize}  %B %Y") %></i>
+                    <% end %>
+                  </div>
+                </div>
               <% end %>
-              <div class="carousel-caption">
-                <%= link_to track do %>
-                  <h2><%= track.title %> - <%= track.artist.name %></h2>
-                  <i>Released: <%= track.release_date.strftime("#{track.release_date.dayordinalize}  %B %Y")  %></i>
-                <% end %>
-              </div>
-            </div>
-          <% else %>
-            <div class="item">
-              <% if track.album %>
-                <% if track.album.photo %>
-                  <%= image_tag track.album.photo.url(:medium), :class => "centreDiv" %>
-                <% end %>
-              <% end %>
-              <div class="carousel-caption">
-                <%= link_to track do %>
-                  <h2><%= track.title %> - <%= track.artist.name %></h2>
-                  <i>Released: <%= track.release_date.strftime("#{track.release_date.day.ordinalize}  %B %Y") %></i>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+            <% end %>
+        </div>
+        <a class="carousel-control left" href="#tenMostRecentTracks" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#tenMostRecentTracks" data-slide="next">&rsaquo;</a>
       </div>
-      <a class="carousel-control left" href="#tenMostRecentTracks" data-slide="prev">&lsaquo;</a>
-      <a class="carousel-control right" href="#tenMostRecentTracks" data-slide="next">&rsaquo;</a>
     </div>
-  </div>
+  <% end %>
 
-  <div class="span6">
-    <h1><u>Ten Most Recently Added Albums</u></h1>
-    <br>
-    <div id="tenMostRecentAlbums" class="carousel slide carousel-fade centreDiv">
-      <div class="carousel-inner">
-        <% tenMostRecentAlbums.each do |album, i| %>
-          <% if i == 0 %>
-            <div class="item active">
-              <% if album.photo %>
-                <%= image_tag album.photo.url(:medium), :class => "centreDiv" %>
-              <% end %>
-              <div class="carousel-caption">
-                <%= link_to album do %>
-                  <h2><%= album.name %></h2>
-                  <i>Released: <%= album.release_date.strftime("#{album.release_date.day.ordinalize} %B %Y")  %></i>
+  <% if tenMostRecentAlbums.count > 0 %>
+    <div class="span6">
+      <h1><u>Ten Most Recently Added Albums</u></h1>
+      <br>
+      <div id="tenMostRecentAlbums" class="carousel slide carousel-fade centreDiv">
+        <div class="carousel-inner">
+          <% tenMostRecentAlbums.each do |album, i| %>
+            <% if i == 0 %>
+              <div class="item active">
+                <% if album.photo %>
+                  <%= image_tag album.photo.url(:medium), :class => "centreDiv" %>
                 <% end %>
+                <div class="carousel-caption">
+                  <%= link_to album do %>
+                    <h2><%= album.name %></h2>
+                    <i>Released: <%= album.release_date.strftime("#{album.release_date.day.ordinalize} %B %Y")  %></i>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          <% else %>
-            <div class="item">
-              <% if album.photo %>
-                <%= image_tag album.photo.url(:medium), :class => "centreDiv" %>
-              <% end %>
-              <div class="carousel-caption">
-                <%= link_to album do %>
-                  <h2><%= album.name %></h2>
-                  <i>Released: <%= album.release_date.strftime("#{album.release_date.day.ordinalize} %B %Y")  %></i>
+            <% else %>
+              <div class="item">
+                <% if album.photo %>
+                  <%= image_tag album.photo.url(:medium), :class => "centreDiv" %>
                 <% end %>
+                <div class="carousel-caption">
+                  <%= link_to album do %>
+                    <h2><%= album.name %></h2>
+                    <i>Released: <%= album.release_date.strftime("#{album.release_date.day.ordinalize} %B %Y")  %></i>
+                  <% end %>
+                </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+        <a class="carousel-control left" href="#tenMostRecentAlbums" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#tenMostRecentAlbums" data-slide="next">&rsaquo;</a>
       </div>
-      <a class="carousel-control left" href="#tenMostRecentAlbums" data-slide="prev">&lsaquo;</a>
-      <a class="carousel-control right" href="#tenMostRecentAlbums" data-slide="next">&rsaquo;</a>
     </div>
-  </div>
+  <% end %>
 </div>
