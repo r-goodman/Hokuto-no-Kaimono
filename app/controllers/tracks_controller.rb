@@ -4,7 +4,12 @@ class TracksController < ApplicationController
   end
 
   def show
-  	@track = Track.find(params[:id])
+    begin
+  	 @track = Track.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.debug "Track Record Not Found - Controller: Tracks || Method: Show"
+      redirect_to tracks_path, :alert => "Track Not Found."
+    end
   end
 
   def new
@@ -31,7 +36,7 @@ class TracksController < ApplicationController
       redirect_to @track
     else
       flash[:notice] = @track.errors
-      redirect_to :edit, :notice => "Update Failed! Please try again"
+      redirect_to :edit, :alert => "Update Failed! Please try again"
     end
   end
 end
