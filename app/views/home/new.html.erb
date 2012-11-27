@@ -16,7 +16,8 @@
               <% if i == 0 %>
                 <div class="item active">
                   <% if track.album.photo %>
-                    <%= image_tag track.album.photo.url(:medium), :class => "centreDiv" %>
+                    <% imageLocation = "http://hokuto.s3.amazonaws.com" + track.album.photo.path(:medium) %> 
+                    <%= image_tag imageLocation, :class => "centreDiv" %>
                   <% end %>
                   <div class="carousel-caption">
                     <%= link_to track do %>
@@ -29,7 +30,8 @@
                 <div class="item">
                   <% if track.album %>
                     <% if track.album.photo %>
-                      <%= image_tag track.album.photo.url(:medium), :class => "centreDiv" %>
+                      <% imageLocation = "http://hokuto.s3.amazonaws.com" + track.album.photo.path(:medium) %> 
+                      <%= image_tag imageLocation, :class => "centreDiv" %>
                     <% end %>
                   <% end %>
                   <div class="carousel-caption">
@@ -58,7 +60,8 @@
             <% if i == 0 %>
               <div class="item active">
                 <% if album.photo %>
-                  <%= image_tag album.photo.url(:medium), :class => "centreDiv" %>
+                  <% imageLocation = "http://hokuto.s3.amazonaws.com" + album.photo.path(:medium) %> 
+                    <%= image_tag imageLocation, :class => "centreDiv" %>
                 <% end %>
                 <div class="carousel-caption">
                   <%= link_to album do %>
@@ -70,7 +73,8 @@
             <% else %>
               <div class="item">
                 <% if album.photo %>
-                  <%= image_tag album.photo.url(:medium), :class => "centreDiv" %>
+                    <% imageLocation = "http://hokuto.s3.amazonaws.com" + album.photo.path(:medium) %> 
+                    <%= image_tag imageLocation, :class => "centreDiv" %>
                 <% end %>
                 <div class="carousel-caption">
                   <%= link_to album do %>
