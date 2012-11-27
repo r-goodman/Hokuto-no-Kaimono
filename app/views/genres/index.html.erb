@@ -6,7 +6,7 @@
 </div>
 
 <% @genres.each do |genre| %>
-	<div class="span2 centreDiv">
+	<div class="span2 centreDiv trackDiv">
 		<%= link_to genre do %>
 			<% imageLocation = "http://hokuto.s3.amazonaws.com" + genre.photo.path(:small) %> 
 			<%= image_tag imageLocation %><br>
