@@ -18,37 +18,39 @@
 </div>
 
 <% if user_signed_in? %>
-	<% if current_user.artist.id == @artist.id %>
-		<div class="row-fluid">
-			<div class="span12 centreDiv">
-				<h3><u>Band Admin Tools</u></h3>
-				<div class="span4">
-					<%= link_to (raw(' <i class="icon-pencil"></i> Edit Band Information ')), edit_artist_path(current_user.artist) %>
-				</div>
+	<% unless current_user.artist.nil? %>
+		<% if current_user.artist.id == @artist.id %>
+			<div class="row-fluid">
+				<div class="span12 centreDiv">
+					<h3><u>Band Admin Tools</u></h3>
+					<div class="span4">
+						<%= link_to (raw(' <i class="icon-pencil"></i> Edit Band Information ')), edit_artist_path(current_user.artist) %>
+					</div>
 
-				<div class="span4">
-					<%= link_to (raw(' <i class="icon-pencil"></i> Add Member To Band ')), edit_artist_path(current_user.artist) %>
-				</div>
+					<div class="span4">
+						<%= link_to (raw(' <i class="icon-pencil"></i> Add Member To Band ')), edit_artist_path(current_user.artist) %>
+					</div>
 
-				<div class="span4">
-					<%= link_to (raw(' <i class="icon-pencil"></i> Remove Member From Band ')), edit_artist_path(current_user.artist) %>
-				</div>
+					<div class="span4">
+						<%= link_to (raw(' <i class="icon-pencil"></i> Remove Member From Band ')), edit_artist_path(current_user.artist) %>
+					</div>
 
-				<div class="span4">
-					<%= link_to (raw(' <i class="icon-music"></i> Create New Album ')), new_album_path %>
-				</div>
+					<div class="span4">
+						<%= link_to (raw(' <i class="icon-music"></i> Create New Album ')), new_album_path %>
+					</div>
 
-				<div class="span4">
-					<%= link_to (raw(' <i class="icon-headphones"></i> Create New Track ')), new_track_path %>
-				</div>
+					<div class="span4">
+						<%= link_to (raw(' <i class="icon-headphones"></i> Create New Track ')), new_track_path %>
+					</div>
 
-				<div class="span4">
-					<%= link_to (raw(' <i class="icon-headphones"></i> View Band Sales ')), "/artists/#{current_user.artist.id}/sales" %>
+					<div class="span4">
+						<%= link_to (raw(' <i class="icon-headphones"></i> View Band Sales ')), "/artists/#{current_user.artist.id}/sales" %>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		<hr>
+			
+			<hr>
+		<% end %>
 	<% end %>
 <% end %>
 

@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
       end
 
     else
-      redirect_to new_user_session_path, :warning => "Please sign in to continue"
+      redirect_to new_user_session_path, :notice => "Please sign in to continue"
     end
   end
 end
