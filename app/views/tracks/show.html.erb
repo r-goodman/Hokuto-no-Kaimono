@@ -1,12 +1,14 @@
 <% if user_signed_in? %>
-	<% if current_user.artist.id == @track.artist.id %>
-				<h3><u>Track Admin Tools</u></h3>
-				<%= link_to (raw(' <i class="icon-pencil"></i> Edit Track Information ')), edit_track_path(@track) %>
+	<% unless current_user.artist.nil? %>
+		<% if current_user.artist.id == @track.artist.id %>
+					<h3><u>Track Admin Tools</u></h3>
+					<%= link_to (raw(' <i class="icon-pencil"></i> Edit Track Information ')), edit_track_path(@track) %>
+				</div>
 			</div>
-		</div>
-		<hr>
-		<div class="row-fluid">
-			<div class="span12 centreDiv">
+			<hr>
+			<div class="row-fluid">
+				<div class="span12 centreDiv">
+		<% end %>
 	<% end %>
 <% end %>
 

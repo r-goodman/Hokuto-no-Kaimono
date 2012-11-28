@@ -1,19 +1,23 @@
-<% if user_signed_in? && current_user.artist %>
-	<% @part_of_album = false %>
+<% if user_signed_in? %>
+	<% unless current_user.artist.nil? %>
+		<% @part_of_album = false %>
 
-	<% @album.tracks.each do |track| %>
-		<% if current_user.artist.id == track.artist.id %>
-			<% @part_of_album = true %>
+		<% @album.tracks.each do |track| %>
+			<% if current_user.artist.id == track.artist.id %>
+				<% @part_of_album = true %>
+			<% end %>
+		<% end %>
+		<% if @part_of_album %>
+						<h3><u>Album Admin Tools</u></h3>
+						<%= link_to (raw(' <i class="icon-pencil"></i> Edit Album Information ')), edit_album_path(@album) %>
+						<%= link_to (raw(' <i class="icon-music"></i> Add Track To Album')), "/albums/#{@album.id}/addTracks", method: :get %>
+					</div>
+				</div>
+				<hr>
+				<div class="row-fluid">
+					<div class="span12 centreDiv">
 		<% end %>
 	<% end %>
-					<h3><u>Album Admin Tools</u></h3>
-					<%= link_to (raw(' <i class="icon-pencil"></i> Edit Album Information ')), edit_album_path(@album) %>
-					<%= link_to (raw(' <i class="icon-music"></i> Add Track To Album')), "/albums/#{@album.id}/addTracks", method: :get %>
-				</div>
-			</div>
-			<hr>
-			<div class="row-fluid">
-				<div class="span12 centreDiv">
 <% end %>
 
 		<div class="hero-unit customHero">
