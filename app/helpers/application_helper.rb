@@ -26,4 +26,24 @@ module ApplicationHelper
 		return @tenAlbums
 	end
 
+	def current_artist(artist)
+		unless current_user.nil?
+
+			unless current_user.artist.nil?
+
+				if current_user.artist == artist
+					true
+				else
+					redirect_to root_url, :alert => "You do not have the permissions to access that page"
+				end
+
+			else
+				redirect_to root_url, :alert => "You do not have the permissions to access that page"
+			end
+
+		else
+			redirect_to new_user_session_path, :warning => "Please sign in to continue"
+		end
+	end
+
 end

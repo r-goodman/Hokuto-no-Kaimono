@@ -15,6 +15,7 @@ class ArtistsController < ApplicationController
   def edit
     begin
   	 @artist = current_user.artist
+     current_artist(@artist)
     rescue ActiveRecord::RecordNotFound
       logger.debug "Artist Record Not Found - Controller: Artists || Method: Edit"
       redirect_to artists_path, :alert => "Artist Not Found."
