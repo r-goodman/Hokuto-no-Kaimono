@@ -30,6 +30,7 @@ class TracksController < ApplicationController
   def edit
     begin
       @track = Track.find(params[:id])
+      current_artist(@track.artist)
     rescue ActiveRecord::RecordNotFound
       logger.debug "Track Record Not Found - Controller: Tracks || Method: Edit"
       redirect_to tracks_path, :alert => "Track Not Found."
