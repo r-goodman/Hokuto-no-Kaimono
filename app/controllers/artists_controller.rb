@@ -13,16 +13,12 @@ class ArtistsController < ApplicationController
   end
 
   def edit
-    if user_signed_in?
-      begin
-    	 @artist = current_user.artist
-       current_artist(@artist.id)
-      rescue ActiveRecord::RecordNotFound
-        logger.debug "Artist Record Not Found - Controller: Artists || Method: Edit"
-        redirect_to artists_path, :alert => "Artist Not Found."
-      end
-    else
-      redirect_to new_user_session_path, :warning => "Please sign in to continue"
+    begin
+  	 @artist = Artist.find(params[:id])
+     current_artist(@artist)
+    rescue ActiveRecord::RecordNotFound
+      logger.debug "Artist Record Not Found - Controller: Artists || Method: Edit"
+      redirect_to artists_path, :alert => "Artist Not Found."
     end
   end
 
