@@ -28,7 +28,7 @@ ActiveAdmin.register User do
 			f.input :email
 	      	f.input :password
 	      	f.input :password_confirmation
-	      	f.input :artist_id
+	      	f.input :artist
 	    end
                         
 	    f.buttons                         
