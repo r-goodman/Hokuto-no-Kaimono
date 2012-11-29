@@ -19,8 +19,8 @@
 			<td><%= item.track.artist.name %></td>
 			<td><%= item.track.album.name %></td>
 			<td><%= item.track.genre.name %></td>
-			<td><%= item.track.length %></td>
-			<td><%= item.track.price %></td>
+			<td><%= (Time.mktime(0) + item.track.length).strftime("%M:%S.%L") %></td>
+			<td><%= number_to_currency(item.track.price, :unit => "&pound;") %></td>
 		</tr>
 	<%end%>
 </table>
