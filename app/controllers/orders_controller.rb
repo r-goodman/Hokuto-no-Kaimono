@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
 
 	def show
 		begin
-			orderDetails = Transaction.find_by_id_and_user_id(params[:id], current_user.id).tracks
+			@orderDetails = Transaction.find_by_id_and_user_id(params[:id], current_user.id).tracks
 		rescue ActiveRecord::RecordNotFound
 			logger.debug "Order Record Not Found - Controller: Orders || Method: Show"
 			redirect_to artists_path, :alert => "Order Not Found."
