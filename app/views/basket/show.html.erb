@@ -17,8 +17,13 @@
 		<th></th>
 	</tr>
 
+	<% @basketPrice = 0 %>
+	<% @basketLength = 0 %>
+
 	<% @basket.line_items.each do |item| %>
 		<tr>
+			<% @basketPrice += item.track.price %>
+			<% @basketLength += item.track.length %>
 			<td><%= link_to item.track.title, item.track %></td>
 			<td><%= link_to item.track.artist.name, item.track.artist %></td>
 			<td><%= link_to item.track.album.name, item.track.album %></td>
@@ -29,6 +34,13 @@
 		</tr>
 	<%end%>
 </table>
+
+<div class="pull-right">
+	Total Price: <%= (Time.mktime(0) + @basketPrice).strftime("%M:%S.%L") %>
+	<br />
+	Total Length: <%= number_to_currency(@basketLength, :unit => "&pound;") %>
+	<br />
+</div>
 
 	<div class="basketTotal">
 		<br>
