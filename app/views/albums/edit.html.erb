@@ -20,7 +20,8 @@
 
   <div>
     <%= f.label :photo %>
-    <%= image_tag @album.photo.url(:small) %>
+    <% imageLocation = "http://hokuto.s3.amazonaws.com" + @album.photo.path(:small) %>
+    <%= image_tag imageLocation %>
     <i>(leave blank if you don't want to change it)</i>
     <br />
     <%= f.file_field :photo %>
