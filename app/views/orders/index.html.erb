@@ -4,6 +4,8 @@
   </div>
 </div>
 
+<% if @orders.count %>
+
 <div class="row-fluid">
   <div class="span12">
 	<table class="table">
@@ -24,3 +26,11 @@
 			</tr>
 		<% end %>
 	</table>
+
+<% else %>
+
+<div class="row-fluid">
+  <div class="span12">
+  	<h3>No Orders</h3>
+
+<% end %>
