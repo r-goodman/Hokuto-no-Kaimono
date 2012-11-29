@@ -18,12 +18,13 @@
 	</tr>
 	<% @orderDetails.each do |order| %>
 	<tr>
-		<td><%= image_tag(order.album.photo.url(:small)) %></td>
+		<% imageLocation = "http://hokuto.s3.amazonaws.com" + order.album.photo.path(:small) %> 
+		<td><%= image_tag imageLocation %></td>
 		<td><%= order.trackNumber %></td>
-		<td><%= order.title %></td>
-		<td><%= order.artist.name %></td>
-		<td><%= order.album.name %></td>
-		<td><%= order.genre.name %></td>
+		<td><%= link_to order.title %></td>
+		<td><%= link_to order.artist.name %></td>
+		<td><%= link_to order.album.name %></td>
+		<td><%= link_to order.genre.name %></td>
 		<td><%= number_to_currency(order.price, :unit => "&pound;") %></td>
 		<td><%= (Time.mktime(0) + order.length).strftime("%Mm %Ss %Lms") %></td>
 		<td><%= link_to "Download Track", order.mp3.expiring_url(300) %></td>
